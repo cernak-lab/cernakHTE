@@ -1,5 +1,7 @@
+from jupyter_dash import JupyterDash
 from dash import dcc, html, Input, Output, no_update, Dash
 import plotly.graph_objects as go
+import pandas as pd
 from rdkit.Chem import AllChem, Draw
 from io import BytesIO
 from PIL import Image
@@ -7,15 +9,9 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash import Dash, dcc, html, Input, Output, State, no_update
 import dash_bootstrap_components as dbc
+import random
+from sklearn.preprocessing import LabelEncoder
 import plotly.express as px
-
-
-# pip install rdkit
-# pip install plotly
-# pip install dash
-# pip install pandas
-# pip install dash_bootstrap_components
-# pip install gunicorn
 
 # df2 #.to_csv('buch/buch_all_data_with_product.csv.gz', index=None)
 
@@ -185,7 +181,6 @@ df3['color'] = df3.Category.apply(lambda x: color_map[x])
 categories = df3['Category'].unique()
 
 app = Dash(__name__)
-server = app.server
 
 names = ['metal_name', 'ligands_categories', 'ligand_name', 'base_name', 'solvent_name', 'elec_name','nuc_name', 'ligand_type', 'temperature', 'reciple_correct']
 target_column = 'product_sum'
@@ -278,7 +273,7 @@ def display_hover(hoverData, selected_categories, yield_slider):
     df_row = filtered_df.iloc[num]
     img_src = df_row['r_smiles']
     
-    recipe_x, l_name, metal_name, elec_name, nuc_name, s_name, base_name, target, metal_found = df_row['reciple_correct'], df_row['ligand_name'], df_row['metal_name'], df_row['elec_name'], df_row['solvent_name'], df_row['nuc_name'], df_row['base_name'], df_row[target_column], df_row['metal_found_x']
+    recipe_x, l_name, metal_name, elec_name, s_name, nuc_name, base_name, target, metal_found = df_row['reciple_correct'], df_row['ligand_name'], df_row['metal_name'], df_row['elec_name'], df_row['solvent_name'], df_row['nuc_name'], df_row['base_name'], df_row[target_column], df_row['metal_found_x']
     
     children = [
         html.Div(children=[
@@ -418,6 +413,4 @@ def update_plot2(hoverData, selected_categories, yield_slider, col_name):
 
 
 if __name__ == "__main__":
-    # app.run(debug=True, port=8500)
-    app.run(debug=True, host="0.0.0.0", port=8050)
-#nohub gunicorn app:server --bind 0.0.0.0:8050 &
+    app.run(debug=True, port=8501)
