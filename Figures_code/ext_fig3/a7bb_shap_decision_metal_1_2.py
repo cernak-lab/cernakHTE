@@ -306,10 +306,11 @@ def main(argv):
     ###### Plot the SHAP Decision plot by metal_types######
     assert len(metal_type) == len(shap_values)
     colors = {
-    "Pd": plt.cm.plasma(0.9),  
-    "Ni": plt.cm.plasma(0.5),  
-    "Cu": plt.cm.plasma(0.1)   
+    "Pd": "#3B39B3",  
+    "Ni": "#B83A68",  
+    "Cu": "#E6E328"   
     }
+    
     plt.figure(figsize=[12, 10])
 #     plt.rcParams['font.weight'] = 'bold'
 
