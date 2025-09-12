@@ -29,19 +29,19 @@ def main(argv):
 
     '''
     #Drop the 'empty' data in case the correlation fails
-    df = pd.read_csv('substrate_5_6_reaction_60DEG.csv') 
+    df = pd.read_csv('substrate_4_5_reaction_60DEG.csv') 
 
     df = df[df != 'empty'].dropna()
-    df.to_csv('substrate_5_6_reaction_60DEG_noempty.csv', index=False)
+    df.to_csv('substrate_4_5_reaction_60DEG_noempty.csv', index=False)
     print (len(df))
 
     #df.replace('empty', 0, inplace=True) #Zero imputation
-    #df.to_csv('substrate_5_6_reaction_60DEG_filled0.csv', index=False)
+    #df.to_csv('substrate_4_5_reaction_60DEG_filled0.csv', index=False)
     exit()
 #    '''
     
-    df=pd.read_csv('substrate_5_6_reaction_60DEG_noempty.csv')
-    choice ='substrate_5_6'        
+    df=pd.read_csv('substrate_4_5_reaction_60DEG_noempty.csv')
+    choice ='substrate_4_5'        
 #     df=pd.read_csv('substrate_1_2_reaction_60DEG_noempty.csv')
 #     choice ='substrate_1_2'
 
@@ -82,8 +82,8 @@ def main(argv):
         
     df = df[df['Product1 / IS'] > threshold] #filter
     df = df.sort_values(by='Product1 / IS', ascending=False) #sort
-    df.to_csv(f'substrate_5_6_reaction_60DEG_noempty_{threshold}_sort_{choice}.csv', index=False)
-    df = pd.read_csv(f'substrate_5_6_reaction_60DEG_noempty_{threshold}_sort_{choice}.csv')
+    df.to_csv(f'substrate_4_5_reaction_60DEG_noempty_{threshold}_sort_{choice}.csv', index=False)
+    df = pd.read_csv(f'substrate_4_5_reaction_60DEG_noempty_{threshold}_sort_{choice}.csv')
     #exit()
 
     idx_base_type = df.columns.get_loc('user-select_chemicalName')
@@ -129,7 +129,7 @@ def main(argv):
     selector.fit(descriptors)
     low_variance_columns = descriptors.columns[~selector.get_support()]
     print("Columns with variance below the threshold:", low_variance_columns)
-    columns1_to_drop = [] #substrate_5_6
+    columns1_to_drop = [] #substrate_4_5
     #columns1_to_drop = ['base_max_part_chrg'] #only drop for substrate_1_2
     #exit()
 
@@ -211,7 +211,7 @@ def main(argv):
     g.ax_heatmap.set_xticks(range(len(reordered_columns)))
     g.ax_heatmap.set_xticklabels(reordered_columns, rotation=90, fontsize=10)
     g.cax.set_position([.05, .83, .03, .15])
-    plt.savefig('a6a_feature_shap_cf3_yield>0.2_stddev_rf_metal_substrate_5_6.jpg',dpi=450)
+    plt.savefig('a6a_feature_shap_cf3_yield>0.2_stddev_rf_metal_substrate_4_5.jpg',dpi=450)
 
     plt.show()
     
@@ -256,7 +256,7 @@ def main(argv):
     g.ax_heatmap.set_xticks(range(len(reordered_columns)))
     g.ax_heatmap.set_xticklabels(reordered_columns, rotation=90, fontsize=10)
     g.cax.set_position([.05, .83, .03, .15])
-    plt.savefig('a6a_feature_shap_cf3_yield>0.2_stddev_rf_metal_substrate_5_6.jpg',dpi=450)
+    plt.savefig('a6a_feature_shap_cf3_yield>0.2_stddev_rf_metal_substrate_4_5.jpg',dpi=450)
     '''
 
     '''
@@ -284,7 +284,7 @@ def main(argv):
     descriptors.columns = descriptors.columns.map(clean_feature_name)
     l = []
     for x in descriptors.columns.to_list():
-        if choice =='substrate_5_6':
+        if choice =='substrate_4_5':
             if x.strip() in fig1toname:
                 l.append(fig1toname[x.strip()])
             else:
@@ -300,7 +300,7 @@ def main(argv):
     shap.decision_plot(explainer.expected_value, shap_values, descriptors, show=False) #feature_display_range=slice(None, -1, -1)
     plt.subplots_adjust(left=0.3)
     plt.subplots_adjust(bottom=0.2)
-    # plt.savefig('a6a_shap_decision_dt_substrate_5_6.jpg', dpi=450)
+    # plt.savefig('a6a_shap_decision_dt_substrate_4_5.jpg', dpi=450)
 #     '''
 
     ###### Plot the SHAP Decision plot by metal_types######
