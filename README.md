@@ -56,13 +56,13 @@ which should install in about 1 minutes.
 ## Install required packages
 The environment.yml and requirements.txt files can be used to set up the environment with Conda and pip, respectively.
 - To install the environment using Conda, run:
-'''
+```
 conda env create -f environment.yml
-'''
+```
 - To install the environment using pip, run:
-'''
+```
 pip install -r requirements.txt
-'''
+```
 
 However, not all of the packages listed are required by the code. Below are the key package versions needed:
 - RDKit library (version 2025.03.3)
